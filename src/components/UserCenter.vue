@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment'
 import myaxios from "@/utils/request.js";
 import outbtn from "./outBtn.vue";
 import userlist from "./UserList.vue";
@@ -34,18 +34,25 @@ export default {
     };
   },
   methods: {
+    // init() {
+    //   let token = localStorage.getItem("token");
+    //   if (!token) {
+    //     this.$message.success("请先登录");
+    //     this.$router.push("/login");
+    //     return;
+    //   }
+    // },
     async getUser() {
       let user_id = localStorage.getItem("user_id");
       const res = await myaxios.get(`/user/` + user_id);
-      res.data.data.create_date = moment(res.data.data.create_date).format(
-        "YYYY-MM-DD HH:mm:ss"
-      );
+      res.data.data.create_date = moment(res.data.data.create_date).format('YYYY-MM-DD HH:mm:ss')
       this.data.push(res.data.data);
       console.log(this.data);
       console.log(res);
     },
   },
   created() {
+    // this.init();
     this.getUser();
   },
 };
